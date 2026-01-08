@@ -1,24 +1,24 @@
-Gross-Pitaevskii Equation Solver (3 Dimensional Spherically Symmetric Case)
+Gross-Pitaevskii Equation Solver (3-Dimensional Spherically Symmetric Case)
 
 gpe
 
     common.py
 
-        evaluate_dt_list for transforming the string structure which is "float"*dr*dr to float. This did not affect directly using float.
+        evaluate_dt_list for transforming the string structure, which is "float"*dr*dr to float. This did not affect directly using float.
 
         initial_phi for initial function which is r * np.exp(-r*r).
 
         normalize for normalization.
 
-        expectation_value_energy for calculating expectation value of energy.
+        expectation_value_energy for calculating the expectation value of energy.
 
-        full_grid for making domain. It is extended from -R to R. This is useful for fft.
+        full_grid for making a domain. It is extended from -R to R. This is useful for fft.
 
         V_full for potential + non-linear part of GPE. There is also adjusment for avoiding singularities.
 
     solvers.py
 
-        Here functions represent one step of process. There are three methods: Time Splitting Spectral Method, Forward-Euler Method, Crank-Nicolson Method 
+        Here, functions represent one step of the process. There are three methods: Time Splitting Spectral Method, Forward-Euler Method, and Crank-Nicolson Method 
 
         Time Splitting Spectral Method
 
@@ -26,21 +26,21 @@ gpe
 
         Forward-Euler Method
 
-            Based on series expansion. Just first order of imaginary time is considered. It is not very stable, but fastest one. (laplacian, FE_step) 
+            Based on a series expansion. Just the first order of imaginary time is considered. It is not very stable, but the fastest one. (laplacian, FE_step) 
 
         Crank-Nicolson Method
 
-            It is also based on series expansion, but in a different way. It is very stable. (CN_step)
+            It is also based on a series expansion, but in a different way. It is very stable. (CN_step)
 
     runners.py
 
-        Run every methods up to some thresholds. These thresholds are maximum iteration number, relative energy differences, and for a given energy limit.
+        Run every method up to some thresholds. These thresholds are the maximum iteration number, relative energy differences, and for a given energy limit.
 
 scripts
 
     input.json
 
-        methods are {"FE","CN","TSSM"} where "FE" refers to Forward-Euler Method, "CN" refers to Crank-Nicolson Method, "TSSM" refers to Time Splitting Spectral Method.
+        methods are {"FE","CN","TSSM"}, where "FE" refers to Forward-Euler Method, "CN" refers to Crank-Nicolson Method, "TSSM" refers to Time Splitting Spectral Method.
 
         g_list stands for coupling constants.
 
