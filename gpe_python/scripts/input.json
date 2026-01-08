@@ -1,0 +1,35 @@
+{
+  "methods": 
+  [
+    "FE","TSSM","CN"
+  ],
+
+  "g_list": 
+  [
+    0.5
+  ],
+
+  "R_list": 
+  [
+    4.0,8.0
+  ],
+
+  "dt_list": 
+  [
+    2e-7,1e-7
+  ],
+
+  "numerics": 
+  {
+    "N": 4096,
+    "tol": 1e-10,
+    "max_iter": 100000,
+    "renorm_every": 100,
+    "report_every": 1e4,
+    "E_aim": null
+  },
+
+  "output": {
+    "out_dir": "gpe_runs"
+  }
+}
