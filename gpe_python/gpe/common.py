@@ -65,13 +65,11 @@ def V_full(phi, x, g):
     if np.any(mask):
         V_eff[mask] += g * dens[mask] / r2[mask]
 
-    # regularize very close to r=0 by copying a nearby non-zero-r value
-    if not np.all(mask):
+    # regularize all near-zero points
+    if not np.all(mask) and np.any(mask):
         idx0 = np.where(~mask)[0]
-        if idx0.size > 0 and np.any(mask):
-            j0 = idx0[0]
-            j_ref = np.where(mask)[0][0]
-            V_eff[j0] = V[j0] + g * dens[j_ref] / r2[j_ref]
+        j_ref = np.where(mask)[0][0]
+        V_eff[idx0] = V[idx0] + g * dens[j_ref] / r2[j_ref]
 
     return V_eff
 
