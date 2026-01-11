@@ -33,7 +33,7 @@ def TSSM_step(phi, x, dx, dt, g):
 
 # Kinetic Part
 def laplacian(phi, dx):
-    lap = np.empty_like(phi)
+    lap = np.zeros_like(phi)
     lap[1:-1] = (phi[2:] - 2*phi[1:-1] + phi[:-2]) / (dx * dx)
     return lap
 
