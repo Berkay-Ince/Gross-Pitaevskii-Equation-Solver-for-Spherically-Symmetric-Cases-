@@ -47,8 +47,8 @@ def expectation_value_energy(phi,x, dr, g):
 # Full Grid from [-R,R]
 
 def full_grid(N, R):
-    dr = R / N
-    r = np.linspace(-R + dr/2, R - dr/2, 2*N)
+    dr = 2*R / N
+    r = -R + (np.arange(N) + 0.5) * dr
     return r, dr
 
 # Potential + Non-linear terms there is also  an adjusment to avoid division by zero. When r<1e-6 the nearst non-zero value is used. V_eff(x) = 1/2 r^2 + g u^2 / r^2
@@ -59,17 +59,7 @@ def V_full(phi, x, g):
     dens = np.abs(phi)**2
 
     V = 0.5 * r2
-    V_eff = V.copy()
-
-    mask = r2 > 1e-12
-    if np.any(mask):
-        V_eff[mask] += g * dens[mask] / r2[mask]
-
-    # regularize all near-zero points
-    if not np.all(mask) and np.any(mask):
-        idx0 = np.where(~mask)[0]
-        j_ref = np.where(mask)[0][0]
-        V_eff[idx0] = V[idx0] + g * dens[j_ref] / r2[j_ref]
-
+    V_eff = V + g * dens / (r2 + 1e-300)
+    
     return V_eff
 
